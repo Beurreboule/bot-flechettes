@@ -1,7 +1,19 @@
 require("dotenv").config();
 
+const http = require("http");
 const { Client, GatewayIntentBits } = require("discord.js");
 const { chromium } = require("playwright");
+
+const PORT = process.env.PORT || 3000;
+
+http
+  .createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Bot actif");
+  })
+  .listen(PORT, "0.0.0.0", () => {
+    console.log(`Serveur web actif sur le port ${PORT}`);
+  });
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds],
@@ -32,7 +44,7 @@ async function checkPage() {
     console.log("----------------------------");
 
     const iframeElement = await page.waitForSelector(
-      'iframe[src*="widget.weezevent.com"]',
+      'iframe[src*="widget_billeterie.php"], iframe[src*="widget.weezevent.com"]',
       { timeout: 15000 }
     );
 
