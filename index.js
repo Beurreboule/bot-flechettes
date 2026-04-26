@@ -68,10 +68,8 @@ async function checkPage() {
     const channel = await client.channels.fetch(process.env.CHANNEL_ID);
 
     if (isSoldOut) {
-      await channel.send("😴 Aucun changement, toujours complet.");
-    } else {
       await channel.send({
-        content: "@everyone 🚨 ALERTE ROUGE : DES PLACES SONT PEUT-ÊTRE DISPO !",
+        content: "@everyone 🚨 ALERTE ROUGE : DES PLACES SONT PEUT-ÊTRE DISPO !\nhttps://my.weezevent.com/flechettes-cup-1",
         allowedMentions: { parse: ["everyone"] },
       });
     }
